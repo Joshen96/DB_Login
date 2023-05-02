@@ -739,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  duplication: 0
 --- !u!4 &74251842
 Transform:
   m_ObjectHideFlags: 0
@@ -994,7 +995,7 @@ GameObject:
   - component: {fileID: 443120327}
   - component: {fileID: 443120326}
   - component: {fileID: 443120325}
-  - component: {fileID: 443120324}
+  - component: {fileID: 443120329}
   m_Layer: 5
   m_Name: ID_check_button
   m_TagString: Untagged
@@ -1023,18 +1024,6 @@ RectTransform:
   m_AnchoredPosition: {x: -111, y: 175}
   m_SizeDelta: {x: 186.1, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &443120324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443120322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86d91f5bf43aa94d8814a7603e4825b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &443120325
 Animator:
   serializedVersion: 5
@@ -1098,7 +1087,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 443120327}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 443120329}
+        m_TargetAssemblyTypeName: Duplication_button, Assembly-CSharp
+        m_MethodName: duplication_push
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &443120327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,6 +1138,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443120322}
   m_CullTransparentMesh: 1
+--- !u!114 &443120329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443120322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6914ca9b4fbcad747910ca6fe8aabdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  database: {fileID: 74251841}
+  id_field: {fileID: 338029002}
+  state_pan: {fileID: 1543980692}
 --- !u!1 &481005316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.79432184, g: 0.9535775, b: 0.9622642, a: 0.8156863}
+  m_Color: {r: 0.79432184, g: 0.9535775, b: 0.9622642, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1585,7 +1601,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 105}
-  m_SizeDelta: {x: 500, y: 150}
+  m_SizeDelta: {x: 728.5, y: 158.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &847513439
 MonoBehaviour:
@@ -2697,7 +2713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 433, y: -132}
+  m_AnchoredPosition: {x: 426, y: -132}
   m_SizeDelta: {x: 298.49612, y: 116.03076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1769036531
@@ -2792,7 +2808,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1769036531}
         m_TargetAssemblyTypeName: add_button, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: Sign_Push
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3018,11 +3034,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: c73192f4166e146879c30ca1b256c33a, type: 3}
-    m_FontSize: 31
+    m_FontSize: 41
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 58
+    m_MaxSize: 75
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3123,8 +3139,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -168}
-  m_SizeDelta: {x: 110.7, y: 80}
+  m_AnchoredPosition: {x: 2, y: -118}
+  m_SizeDelta: {x: 185.2, y: 102.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1838463962
 MonoBehaviour:
@@ -3385,6 +3401,7 @@ MonoBehaviour:
   database: {fileID: 74251841}
   id_field: {fileID: 338029002}
   pw_field: {fileID: 1198541534}
+  Main_Panel: {fileID: 1543980692}
 --- !u!224 &1968373805521870064
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3979,8 +3996,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4926976502114895290}
   m_TextComponent: {fileID: 4926976502114920560}
   m_Placeholder: {fileID: 0}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

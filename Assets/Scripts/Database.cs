@@ -6,17 +6,20 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using UnityEngine.UI;
 using System.Security.Cryptography;
+using System;
 
 public class Database : MonoBehaviour
 {
     
-    public class DataScore
+    public class DataLogin
     {
         public string id { get; set; }
-        public int pw { get; set; }
+        public string pw { get; set; }
     }
 
     public int state =10;
+
+    public bool duplication = false;
 
     private void Start()
     {
@@ -90,8 +93,73 @@ public class Database : MonoBehaviour
             }
         }
     }
-  
-        
+    private IEnumerator GetLoginCoroutine()
+    {
+        using (UnityWebRequest www =
+            UnityWebRequest.Post("http://localhost/getLogin.php", ""))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("핸들러 " + www.downloadHandler.text);
+                string data = www.downloadHandler.text; //텍스트로 받아온다
+
+                List<DataLogin> datainfos =
+                   JsonConvert.DeserializeObject<List<DataLogin>>(data); //역직열화 숫자는 인트 같은작업을 해준다 제이슨사용이유
+                //목록으로 만들어줌
+
+                foreach (DataLogin datainfo in datainfos)
+                {
+                    Debug.Log(datainfo.id + " : " + datainfo.pw);
+                    
+
+                }
+            }
+        }
+    }
+
+    private IEnumerator GetLoginCKCoroutine(string id)
+    {
+        using (UnityWebRequest www =
+            UnityWebRequest.Post("http://localhost/getLogin.php", ""))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("핸들러 " + www.downloadHandler.text);
+                string data = www.downloadHandler.text; //텍스트로 받아온다
+
+                List<DataLogin> datainfos =
+                   JsonConvert.DeserializeObject<List<DataLogin>>(data); //역직열화 숫자는 인트 같은작업을 해준다 제이슨사용이유
+                //목록으로 만들어줌
+
+                foreach (DataLogin datainfo in datainfos)
+                {
+                    if(datainfo.id ==id)
+                    {
+                        duplication = true;
+
+                        break;
+                    }
+                    
+                    Debug.Log("디비속" + duplication);
+                }
+            }
+        }
+
+
+    }
+
     public void SignUp(string _id, string _pw)
     {
 
@@ -104,6 +172,11 @@ public class Database : MonoBehaviour
   
 
     }
+    public IEnumerator getlog(string _id)
+    {
+        yield return StartCoroutine(GetLoginCKCoroutine(_id));
+    }
+
 
     
 }

@@ -24,6 +24,7 @@ public class add_button : MonoBehaviour
 
     public void Login_push()
     {
+        
         if (id.text == "" || pw.text == "")
         {
             Main_Panel.gameObject.SetActive(true);
@@ -102,9 +103,9 @@ public class add_button : MonoBehaviour
         Main_Panel.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
     }
-    public void Sign_Canvas_()
+    public void Sign_Push() //회원가입 창띄우는 버튼
     {
-
+        Main_Panel.gameObject.SetActive(true);
     }
     
 
