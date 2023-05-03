@@ -7,14 +7,22 @@ using Newtonsoft.Json;
 using UnityEngine.UI;
 using System.Security.Cryptography;
 using System;
+using UnityEngine.Rendering;
 
 public class Database : MonoBehaviour
 {
-    
+    [SerializeField]
+    GameObject textPrefab = null;
+    [SerializeField]
+    GameObject Content = null;
     public class DataLogin
     {
         public string id { get; set; }
         public string pw { get; set; }
+
+        
+        public string name { get; set; }
+        public string age { get; set; }
     }
 
     public int state =10;
@@ -33,11 +41,14 @@ public class Database : MonoBehaviour
 
 
     private IEnumerator SignUpCoroutine(
-         string _id, string _pw)
+         string _id, string _pw, string _name , string _age)
     {
         WWWForm form = new WWWForm();
         form.AddField("id", _id);
         form.AddField("pw", _pw);
+        form.AddField("name", _name);
+        form.AddField("age", _age);
+
 
         using (UnityWebRequest www =
             UnityWebRequest.Post("" +
@@ -54,7 +65,7 @@ public class Database : MonoBehaviour
             {
                 Debug.Log(
                     "AddScore Success : " +
-                    _id + "(" + _pw + ")");
+                    _id + "(" + _pw +_name +_age+ ")");
             }
         }
     }
@@ -115,8 +126,18 @@ public class Database : MonoBehaviour
 
                 foreach (DataLogin datainfo in datainfos)
                 {
-                    Debug.Log(datainfo.id + " : " + datainfo.pw);
-                    
+                    Debug.Log(datainfo.id + " : " + datainfo.pw+ " : "+ datainfo.name + " : " + datainfo.age );
+                    GameObject idtext = GameObject.Instantiate(textPrefab, Content.transform);
+                    GameObject nametext = GameObject.Instantiate(textPrefab, Content.transform);
+                    GameObject agetext = GameObject.Instantiate(textPrefab, Content.transform);
+                    Text text1 = idtext.GetComponent<Text>();
+                    Text text2 = nametext.GetComponent<Text>();
+                    Text text3 = agetext.GetComponent<Text>();
+                    //text1.text = string.Format("아이디 : [ {0,10} ] 이름 : [ {1,8} ] 나이 : [ {2,4} ]", datainfo.id, datainfo.name,datainfo.age);
+                    text1.text = string.Format("{0}", datainfo.id);
+                    text2.text = string.Format("{0}", datainfo.name);
+                    text3.text = string.Format("{0}", datainfo.age);
+                    //text.transform.parent = Content.transform;
 
                 }
             }
@@ -160,10 +181,10 @@ public class Database : MonoBehaviour
 
     }
 
-    public void SignUp(string _id, string _pw)
+    public void SignUp(string _id, string _pw ,string _name, string _age)
     {
 
-        StartCoroutine(SignUpCoroutine(_id, _pw));
+        StartCoroutine(SignUpCoroutine(_id, _pw,_name,_age));
     }
     public IEnumerator Login_Ck(string _id, string _pw)
     {
@@ -177,6 +198,10 @@ public class Database : MonoBehaviour
         yield return StartCoroutine(GetLoginCKCoroutine(_id));
     }
 
+    public void uploadDB()
+    {
+        StartCoroutine(GetLoginCoroutine());
+    }
 
     
 }

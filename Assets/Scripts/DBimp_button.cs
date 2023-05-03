@@ -22,7 +22,7 @@ public class DBimp_button : MonoBehaviour
             }
         }
 
-       // database.("joshen", "qwer12");
+        database.uploadDB();
 
     }
    

@@ -18,7 +18,10 @@ public class add_button : MonoBehaviour
     Coroutine coroutine = null;
 
     [SerializeField]
-    GameObject Main_Panel = null;
+    GameObject State_Panel = null;
+    [SerializeField]
+    GameObject Suclogin_panel = null;
+
     
    
 
@@ -27,8 +30,8 @@ public class add_button : MonoBehaviour
         
         if (id.text == "" || pw.text == "")
         {
-            Main_Panel.gameObject.SetActive(true);
-            GameObject state = Main_Panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+            State_Panel.gameObject.SetActive(true);
+            GameObject state = State_Panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
             Text state_text = state.GetComponent<Text>();
             state_text.text = "<color=red><size=60>다시</size></color>입력하세요";
             
@@ -62,34 +65,36 @@ public class add_button : MonoBehaviour
         if (database.state == 1)
         {
             Debug.Log("성공");
-            Main_Panel.gameObject.SetActive(true);
-
-            GameObject state = Main_Panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+            Suclogin_panel.gameObject.SetActive(true);
+            
+            GameObject state = Suclogin_panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
             Text state_text = state.GetComponent<Text>();
 
-            state_text.text = "<color=aqua><size=60>로그인성공</size></color>";
+            state_text.text = "<color=aqua><size=60>로그인 성공!</size></color>";
             //로그인성공부분
+
+            //여기에 이제 디비 전체 정보 보여주기 만들기
 
         }
         else if(database.state == 2) 
         {
             Debug.Log("비번틀림");
 
-            Main_Panel.gameObject.SetActive(true);
-            GameObject state = Main_Panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+            State_Panel.gameObject.SetActive(true);
+            GameObject state = State_Panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
             Text state_text = state.GetComponent<Text>();
 
-            state_text.text = "<color=orange><size=60>비번틀림</size></color>";
+            state_text.text = "<color=orange><size=60>비밀번호를 다시입력 하세요.</size></color>";
         }
         else if(database.state == 3) 
         {
             
-            Debug.Log("아이디없음");
-            Main_Panel.gameObject.SetActive(true);
-            GameObject state = Main_Panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+            Debug.Log("존재하지 않는 아이디");
+            State_Panel.gameObject.SetActive(true);
+            GameObject state = State_Panel.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
             Text state_text = state.GetComponent<Text>();
 
-            state_text.text = "<color=lime><size=60>아이디 없음</size></color>";
+            state_text.text = "<color=lime><size=60>존재하지 않는</size></color>아이디.";
         }
         else
         {
@@ -100,12 +105,12 @@ public class add_button : MonoBehaviour
     }
     public void quit()
     {
-        Main_Panel.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        State_Panel.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
     }
     public void Sign_Push() //회원가입 창띄우는 버튼
     {
-        Main_Panel.gameObject.SetActive(true);
+        State_Panel.gameObject.SetActive(true);
     }
     
 
