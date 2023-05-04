@@ -5,6 +5,8 @@ using UnityEngine;
 public class Close_button : MonoBehaviour
 {
     [SerializeField]
+    Database database;
+    [SerializeField]
     GameObject user_canvas;
     public void Close_Panel()
     {
@@ -15,6 +17,8 @@ public class Close_button : MonoBehaviour
     public void SucLogin_Panel()
     {
         user_canvas.gameObject.SetActive(true);
+        database.uploadDB();
         this.transform.parent.gameObject.transform.parent.gameObject.SetActive(false);
+
     }
 }

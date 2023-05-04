@@ -31,6 +31,7 @@ public class Duplication_button : MonoBehaviour
         yield return StartCoroutine(database.getlog(id_field.text));
         Debug.Log("â1_1");
         yield return StartCoroutine(check());
+        
     }
 
     IEnumerator check()
@@ -52,7 +53,7 @@ public class Duplication_button : MonoBehaviour
 
         }
 
-        yield return coroutine;
+        yield return null;
     }
     public Text Activewindow()
     {
