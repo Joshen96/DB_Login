@@ -15,8 +15,6 @@ public class Database : MonoBehaviour
     GameObject textPrefab = null;
     [SerializeField]
     GameObject Content = null;
-
-    int a = 10;
     public class DataLogin
     {
         public string id { get; set; }
